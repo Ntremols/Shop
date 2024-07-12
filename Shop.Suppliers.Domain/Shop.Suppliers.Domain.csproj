@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Shop.Common.Data\Shop.Common.Data.csproj" />
+    <ProjectReference Include="..\Shop.OrderDetails.Api\Shop.Categories.Api.csproj" />
   </ItemGroup>
 
 </Project>
