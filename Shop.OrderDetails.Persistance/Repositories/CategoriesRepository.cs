@@ -1,46 +1,118 @@
-﻿
-using System.ComponentModel;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
+using Microsoft.Extensions.Logging;
 using Shop.Categories.Domain.Entities;
 using Shop.Categories.Domain.Interfaces;
+using Shop.Categories.Persistence.Context;
+using Shop.Categories.Persistence.Exceptions;
 
 namespace Shop.Categories.Persistence.Repositories
 {
     public class CategoriesRepository : ICategoriesRepository
     {
+        private readonly ShopContext _shopContext;
+
+        private readonly ILogger<CategoriesRepository> _logger;
+        public CategoriesRepository(ShopContext context, ILogger<CategoriesRepository> logger)
+        {
+            _shopContext = context;
+            _logger = logger;
+        }
         public bool Exists(Expression<Func<Domain.Entities.Categories, bool>> filter)
         {
-            throw new NotImplementedException();
+            return this._shopContext.Categories.Any(filter);
         }
 
         public List<Domain.Entities.Categories> GetAll()
         {
-            throw new NotImplementedException();
+            return this._shopContext.Categories.ToList();
         }
 
-        public List<Domain.Entities.Categories> GetCategoriesByDeparmentId(int deparmentId)
+        public List<Domain.Entities.Categories> GetCategoriesById(int Id)
         {
             throw new NotImplementedException();
         }
 
         public Domain.Entities.Categories GetEntityBy(int Id)
         {
-            throw new NotImplementedException();
-        }
+            Domain.Entities.Categories? category = null;
+            try
+            {
+                category = this._shopContext.Categories.Find(Id);
 
+                if (category is null)
+                    throw new CategoriesException("La categoria no se ha encontrado.");
+                return category;
+            }
+            catch (Exception ex)
+            {
+                this._logger.LogError("Error para encontrar la categoria.", ex.ToString());
+            }
+            return category;
+        }
+        
         public void Remove(Domain.Entities.Categories entity)
         {
-            throw new NotImplementedException();
-        }
+            try
+            {
+                if (entity is null)
+                    throw new ArgumentNullException("La entidad de la categoria no puede ser null.");
 
+                Domain.Entities.Categories? categoriesToRemove = this._shopContext.Categories.Find(entity.Id);
+
+                categoriesToRemove.DeleteUser = entity.DeleteUser;
+                categoriesToRemove.Deleted = entity.Deleted;
+                categoriesToRemove.DeleteDate = entity.DeleteDate;
+
+                _shopContext.Categories.Update(categoriesToRemove);
+                this._shopContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                this._logger.LogError("Error eliminando la categoria");
+            }
+        }
+        
         public void Save(Domain.Entities.Categories entity)
         {
-            throw new NotImplementedException();
-        }
+            try
+            {
+                if (entity is null)
+                    throw new ArgumentNullException("La entidad de la categoria no puede ser nulo.");
 
+                if (Exists(co => co.CategoryName.Equals(entity.CategoryName)))
+                    throw new CategoriesException("La categoria no se encuentra registrada.");
+
+                _shopContext.Categories.Add(entity);
+                _shopContext.SaveChanges();
+            }
+            catch(Exception ex)
+            {
+                this._logger.LogError("Error agregando la categoria", ex.ToString());
+            }
+        }
+        
         public void Update(Domain.Entities.Categories entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                if (entity is null)
+                    throw new ArgumentNullException("La entidad de categorias no puede ser nulo.");
+
+                Domain.Entities.Categories? categoriesToUpdate = this._shopContext.Categories.Find(entity.Id);
+
+                if (categoriesToUpdate == null)
+                    throw new CategoriesException("La categoria que desea actualizar no se encuentra registrada.");
+
+                categoriesToUpdate.ModifyDate = entity.ModifyDate;
+
+                _shopContext.Categories.Update(categoriesToUpdate);
+                _shopContext.SaveChanges();
+
+            }
+            catch (Exception ex)
+            {
+                this._logger.LogError("Error actualizando la categoria.", ex.ToString());
+            }
         }
     }
 }

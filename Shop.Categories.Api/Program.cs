@@ -1,22 +1,19 @@
-using Microsoft.EntityFrameworkCore;
-using Shop.Suppliers.Domain.Interfaces;
-using Shop.Suppliers.Persistence.Context;
-using Shop.Suppliers.Persistence.Repositories;
 
+using Microsoft.EntityFrameworkCore;
+using Shop.Categories.Domain.Interfaces;
+using Shop.Categories.Persistence.Context;
+using Shop.Categories.Persistence.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-var connstring = builder.Configuration.GetConnectionString("ShopContext");
-
-
 
 builder.Services.AddDbContext<ShopContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("ShopContext")));
 
-//agregar dependenciass de objeto de datos
-builder.Services.AddScoped<ISuppliersRepository, SuppliersRepository>();
+// add dependency objeto de datos
+builder.Services.AddScoped<ICategoriesRepository, CategoriesRepository>();
 
 
 builder.Services.AddControllers();

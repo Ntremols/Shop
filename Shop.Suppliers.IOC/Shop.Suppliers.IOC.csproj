@@ -6,4 +6,14 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Shop.Suppliers.Application\Shop.Suppliers.Application.csproj" />
+    <ProjectReference Include="..\Shop.Suppliers.Domain\Shop.Suppliers.Domain.csproj" />
+    <ProjectReference Include="..\Shop.Suppliers.Persistence\Shop.Suppliers.Persistence.csproj" />
+  </ItemGroup>
+
 </Project>

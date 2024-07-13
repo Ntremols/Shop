@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
 namespace Shop.Products.Persistence.Exceptions
 {
-    public class ProductsException
+    public class ProductsException : Exception
     {
+        public ProductsException(string message) : base(message)
+        {
 
+        }
     }
 }

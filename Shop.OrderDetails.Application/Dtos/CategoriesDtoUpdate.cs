@@ -2,7 +2,7 @@
 
 namespace Shop.Categories.Application.Dtos
 {
-    public class CategoriesDtoUpdate
+    public class CategoriesDtoUpdate : DtoBaseCategories
     {
     }
 }

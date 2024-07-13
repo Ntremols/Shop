@@ -9,5 +9,7 @@ namespace Shop.Suppliers.Domain.Entities
     {
         [Column("supplierid")]
         public override int Id { get; set; }
+
+        public string CompanyName { get; set; }
     }
 }

@@ -1,11 +1,11 @@
 ﻿
-using Shop.Products.Domain.Entities;
+
 using Shop.Common.Data.Repository;
 
 namespace Shop.Products.Domain.Interfaces
 {
-    public interface IProductsRepository : IBaseRepository<Domain.Entities.Products,int>
+    public interface IProductsRepository : IBaseRepository<Entities.Products,int>
     {
-        List<Products.Domain.Entities.Products> GetProductsByDeparmentId(int deparmentId);
+        List<Entities.Products> GetProductsById(int productId);
     }
 }

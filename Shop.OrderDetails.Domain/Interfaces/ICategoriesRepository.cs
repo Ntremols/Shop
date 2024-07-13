@@ -5,8 +5,8 @@ using Shop.Common.Data.Repository;
 
 namespace Shop.Categories.Domain.Interfaces
 {
-   public interface ICategoriesRepository : IBaseRepository<Domain.Entities.Categories,int>
+   public interface ICategoriesRepository : IBaseRepository<Entities.Categories, int>
     {
-        List<Categories.Domain.Entities.Categories> GetCategoriesByDeparmentId(int deparmentId);
+        List<Entities.Categories> GetCategoriesById(int categoryId);
     }
 }
