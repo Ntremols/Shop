@@ -12,9 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Shop.Products.Domain\Shop.Products.Domain.csproj" />
     <ProjectReference Include="..\Shop.Products.IOC\Shop.Products.IOC.csproj" />
-    <ProjectReference Include="..\Shop.Products.Persistence\Shop.Products.Persistence.csproj" />
   </ItemGroup>
 
 </Project>

@@ -2,7 +2,7 @@
 using Shop.Suppliers.Application.Base;
 using Shop.Suppliers.Application.Dtos;
 
-namespace Shop.Suppliers.Suppliers.Contracts
+namespace Shop.Suppliers.Application.Contracts
 {
     public interface ISuppliersService
     {

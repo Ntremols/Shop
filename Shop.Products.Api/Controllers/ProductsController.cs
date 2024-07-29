@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+using Shop.Products.Application.Contracts;
+using Shop.Products.Application.Dtos;
 
 namespace Shop.Products.Api.Controllers
 {
@@ -8,36 +8,72 @@ namespace Shop.Products.Api.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        // GET: api/<ProductsController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        private readonly IProductsService productsService;
+
+        public ProductsController(IProductsService productsService)
         {
-            return new string[] { "value1", "value2" };
+            this.productsService = productsService;
         }
 
-        // GET api/<ProductsController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+       
+        [HttpGet("GetProducts")]
+        public IActionResult Get()
         {
-            return "value";
+            var result = this.productsService.GetProducts();
+            if (!result.Success)
+            {
+                return BadRequest(result);
+            }
+            else
+                return Ok(result);
         }
 
-        // POST api/<ProductsController>
-        [HttpPost]
-        public void Post([FromBody] string value)
+        [HttpPost("GetProductsById")]
+        public IActionResult Get(int id)
         {
+            var result = this.productsService.GetProductsById(id);
+            if (!result.Success)
+            {
+                return BadRequest(result);
+            }
+            else
+                return Ok(result);
         }
 
-        // PUT api/<ProductsController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPost("SaveProducts")]
+        public IActionResult Post([FromBody] ProductsDtoSave dtoSave)
         {
+            var result = this.productsService.SaveProducts(dtoSave);
+            if (!result.Success)
+            {
+                return BadRequest(result);
+            }
+            else
+                return Ok(result);
         }
 
-        // DELETE api/<ProductsController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpPut("UpdateProducts")]
+        public IActionResult Put(ProductsDtoUpdate dtoUpdate)
         {
+            var result = this.productsService.UpdateProducts(dtoUpdate);
+            if (!result.Success)
+            {
+                return BadRequest(result);
+            }
+            else
+                return Ok(result);
+        }
+
+        [HttpPost("DeleteProducts")]
+        public IActionResult Delete(ProductsDtoRemove dtoRemove)
+        {
+            var result = this.productsService.RemoveProducts(dtoRemove);
+            if (!result.Success)
+            {
+                return BadRequest(result);
+            }
+            else
+                return Ok(result);
         }
     }
 }

@@ -11,5 +11,7 @@ namespace Shop.Suppliers.Domain.Entities
         public override int Id { get; set; }
 
         public string CompanyName { get; set; }
+
+        public string ContactName { get; set; }
     }
 }

@@ -1,7 +1,7 @@
 ﻿
 namespace Shop.Suppliers.Application.Dtos
 {
-    public class SuppliersDtoUpdate
+    public class SuppliersDtoUpdate : DtoBaseSuppliers
     {
     }
 }

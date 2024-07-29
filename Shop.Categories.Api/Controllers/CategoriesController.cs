@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+using Shop.Categories.Application.Contracts;
+using Shop.Categories.Application.Dtos;
 
 namespace Shop.Categories.Api.Controllers
 {
@@ -8,36 +8,76 @@ namespace Shop.Categories.Api.Controllers
     [ApiController]
     public class CategoriesController : ControllerBase
     {
-        // GET: api/<CategoriesController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        private readonly ICategoriesService categoriesService;
+
+        public CategoriesController(ICategoriesService categoriesService)
         {
-            return new string[] { "value1", "value2" };
+            this.categoriesService = categoriesService;
         }
 
-        // GET api/<CategoriesController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+   
+        [HttpGet("GetCategories")]
+        public IActionResult Get()
         {
-            return "value";
+            var result = this.categoriesService.GetCategories();
+            if (!result.Success)
+            {
+                return BadRequest(result);
+            }
+            else 
+                return Ok(result);
         }
 
-        // POST api/<CategoriesController>
-        [HttpPost]
-        public void Post([FromBody] string value)
+     
+        [HttpGet("GetCategoriesById")]
+        public IActionResult Get(int id)
         {
+            var result = this.categoriesService.GetCategoryById(id);
+            if (!result.Success)
+            {
+                return BadRequest(result);
+            }
+            else
+                return Ok(result);
         }
 
-        // PUT api/<CategoriesController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+      
+        [HttpPost("SaveCategories")]
+        public IActionResult Post([FromBody] CategoriesDtoSave dtoSave)
         {
+            var result = this.categoriesService.SaveCategories(dtoSave);
+            if (!result.Success)
+            {
+                return BadRequest(result);
+            }
+            else
+                return Ok(result);
         }
 
-        // DELETE api/<CategoriesController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        
+        [HttpPost("UpdateCategories")]
+        public IActionResult Put(CategoriesDtoUpdate dtoUpdate)
         {
+            var result = this.categoriesService.UpdateCategories(dtoUpdate);
+            if (!result.Success)
+            {
+                return BadRequest(result);
+            }
+            else
+                return Ok(result);
+        }
+
+       
+        [HttpPost("DeleteCategories")]
+        public IActionResult Delete(CategoriesDtoRemove dtoRemove)
+        {
+            var result = this.categoriesService.RemoveCategories(dtoRemove);
+            if (!result.Success)
+            {
+                return BadRequest(result);
+            }
+            else
+                return Ok(result);
         }
     }
 }

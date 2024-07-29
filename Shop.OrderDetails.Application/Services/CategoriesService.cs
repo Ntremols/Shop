@@ -48,8 +48,6 @@ namespace Shop.Categories.Application.Services
            
         }
 
-
-
         public ServiceResult GetCategoryById(int id)
         {
             ServiceResult result = new ServiceResult();

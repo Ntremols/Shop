@@ -2,7 +2,7 @@
 
 namespace Shop.Products.Application.Dtos
 {
-    public class ProductsDtoUpdate
+    public class ProductsDtoUpdate : DtoBaseProducts
     {
     }
 }

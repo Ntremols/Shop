@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Shop.Products.Persistence.Context;
+using Shop.Products.IOC.Dependencies;
 using Shop.Products.Domain.Interfaces;
 using Shop.Products.Persistence.Repositories;
 
@@ -26,8 +27,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
-app.UseHttpsRedirection();
 
 app.UseAuthorization();
 

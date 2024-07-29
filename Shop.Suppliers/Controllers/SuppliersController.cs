@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+using Shop.Suppliers.Application.Contracts;
+using Shop.Suppliers.Application.Dtos;
 
 namespace Shop.Suppliers.Api.Controllers
 {
@@ -8,36 +8,72 @@ namespace Shop.Suppliers.Api.Controllers
     [ApiController]
     public class SuppliersController : ControllerBase
     {
-        // GET: api/<SuppliersController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        private readonly ISuppliersService suppliersService;
+
+        public SuppliersController(ISuppliersService suppliersService)
         {
-            return new string[] { "value1", "value2" };
+            this.suppliersService = suppliersService;
         }
 
-        // GET api/<SuppliersController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+
+        [HttpGet("GetSuppliers")]
+        public IActionResult Get()
         {
-            return "value";
+            var result = this.suppliersService.GetSuppliers();
+            if (!result.Success)
+            {
+                return BadRequest(result);
+            }
+            else
+                return Ok(result);
         }
 
-        // POST api/<SuppliersController>
-        [HttpPost]
-        public void Post([FromBody] string value)
+        [HttpGet("GetSuppliersById")]
+        public IActionResult Get(int id)
         {
+            var result = this.suppliersService.GetSuppliersById(id);
+            if (!result.Success)
+            {
+                return BadRequest(result);
+            }
+            else
+                return Ok(result);
         }
 
-        // PUT api/<SuppliersController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPost("SaveSuppliers")]
+        public IActionResult Post([FromBody] SuppliersDtoSave dtoSave)
         {
+            var result = this.suppliersService.SaveSuppliers(dtoSave);
+            if (!result.Success)
+            {
+                return BadRequest(result);
+            }
+            else
+                return Ok(result);
         }
 
-        // DELETE api/<SuppliersController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpPost("UpdateSuppliers")]
+        public IActionResult Put(SuppliersDtoUpdate dtoUpdate)
         {
+            var result = this.suppliersService.UpdateSuppliers(dtoUpdate);
+            if (!result.Success)
+            {
+                return BadRequest(result);
+            }
+            else
+                return Ok(result);
+        }
+
+        [HttpPost("DeleteSuppliers")]
+        public IActionResult Delete(SuppliersDtoRemove dtoRemove)
+        {
+            var result = this.suppliersService.RemoveSuppliers(dtoRemove);
+            if (!result.Success)
+            {
+                return BadRequest(result);
+            }
+            else
+                return Ok(result);
         }
     }
 }

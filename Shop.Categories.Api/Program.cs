@@ -7,6 +7,8 @@ using Shop.Categories.Persistence.Repositories;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+var connstring = builder.Configuration.GetConnectionString("ShopContext");
+
 
 
 builder.Services.AddDbContext<ShopContext>(options =>
@@ -29,8 +31,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
-app.UseHttpsRedirection();
 
 app.UseAuthorization();
 

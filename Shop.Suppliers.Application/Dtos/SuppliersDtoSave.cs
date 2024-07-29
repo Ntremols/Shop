@@ -2,7 +2,7 @@
 
 namespace Shop.Suppliers.Application.Dtos
 {
-    public class SuppliersDtoSave
+    public class SuppliersDtoSave : DtoBaseSuppliers
     {
     }
 }

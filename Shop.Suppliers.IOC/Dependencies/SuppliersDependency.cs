@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Shop.Suppliers.Application.Services;
 using Shop.Suppliers.Domain.Interfaces;
 using Shop.Suppliers.Persistence.Repositories;
-using Shop.Suppliers.Suppliers.Contracts;
+using Shop.Suppliers.Application.Contracts;
 
 namespace Shop.Suppliers.IOC.Dependencies
 {

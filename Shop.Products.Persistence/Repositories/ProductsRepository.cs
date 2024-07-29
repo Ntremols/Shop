@@ -96,20 +96,20 @@ namespace Shop.Products.Persistence.Repositories
                 if (entity is null)
                     throw new ArgumentNullException("La entidad de productos no puede ser nulo.");
 
-                Domain.Entities.Products? productosToUpdate = this._shopContext.Products.Find(entity.Id);
+                Domain.Entities.Products? productsToUpdate = this._shopContext.Products.Find(entity.Id);
 
-                if (productosToUpdate == null)
-                    throw new ProductsException("Ek producto que desea actualizar no se encuentra registrada.");
+                if (productsToUpdate == null)
+                    throw new ProductsException("El producto que desea actualizar no se encuentra registrada.");
 
-                productosToUpdate.ModifyDate = entity.ModifyDate;
+                productsToUpdate.ModifyDate = entity.ModifyDate;
 
-                _shopContext.Products.Update(productosToUpdate);
+                _shopContext.Products.Update(productsToUpdate);
                 _shopContext.SaveChanges();
 
             }
             catch (Exception ex)
             {
-                this._logger.LogError("Error actualizando la categoria.", ex.ToString());
+                this._logger.LogError("Error actualizando el producto.", ex.ToString());
             }
         }
     }

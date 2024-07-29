@@ -11,13 +11,11 @@ var builder = WebApplication.CreateBuilder(args);
 var connstring = builder.Configuration.GetConnectionString("ShopContext");
 
 
-
 builder.Services.AddDbContext<ShopContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("ShopContext")));
 
 //agregar dependenciass de objeto de datos
 builder.Services.AddScoped<ISuppliersRepository, SuppliersRepository>();
-
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -33,7 +31,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
