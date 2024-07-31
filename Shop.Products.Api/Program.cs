@@ -7,6 +7,10 @@ using Shop.Products.Persistence.Repositories;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+var connstring = builder.Configuration.GetConnectionString("ShopContext");
+
+builder.Services.AddProductsDependency();
+
 
 builder.Services.AddDbContext<ShopContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("ShopContext")));

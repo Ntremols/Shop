@@ -10,34 +10,37 @@ using Shop.Suppliers.Application.Contracts;
 
 namespace Shop.Suppliers.Application.Services
 {
-    public class SuppliersService : ISuppliersService
+    public class SuppliersServices : ISuppliersServices
     {
         private readonly ISuppliersRepository suppliersRepository;
-        private readonly ILogger<SuppliersService> logger;
+        private readonly ILogger<SuppliersServices> logger;
 
-        public SuppliersService(ISuppliersRepository suppliersRepository, ILogger<SuppliersService> logger)
+        public SuppliersServices(ISuppliersRepository suppliersRepository, ILogger<SuppliersServices> logger)
         {
             this.suppliersRepository = suppliersRepository;
             this.logger = logger;
         }
 
-        public ServiceResult GetSuppliers()
+        public ServicesResult GetSuppliers()
         {
-            ServiceResult result = new ServiceResult();
+            ServicesResult result = new ServicesResult();
             try
             {
                 var suppliers = this.suppliersRepository.GetAll();
 
-                result.Result = (from supplier in suppliersRepository.GetAll()
+                result.Result = (from supplier in suppliers
                                  where supplier.Deleted == false
                                  select new SuppliersDtoGetAll()
                                  {
                                      SupplierId = supplier.Id,
-                                     CompanyName= supplier.CompanyName,
+                                     CompanyName = supplier.CompanyName,
                                      ContactName = supplier.ContactName,
                                      CreationDate = supplier.CreationDate,
                                      CreationUser = supplier.CreationUser
                                  }).OrderByDescending(cd => cd.CreationDate).ToList();
+
+                result.Success = true; // Set success to true after successful operation
+                Console.WriteLine("here");
             }
             catch (Exception ex)
             {
@@ -46,12 +49,12 @@ namespace Shop.Suppliers.Application.Services
                 this.logger.LogError(message: result.Message, ex.ToString());
             }
             return result;
-
         }
 
-        public ServiceResult RemoveSuppliers(SuppliersDtoRemove supplierDtoRemove)
+
+        public ServicesResult RemoveSuppliers(SuppliersDtoRemove supplierDtoRemove)
         {
-            ServiceResult result = new ServiceResult();
+            ServicesResult result = new ServicesResult();
 
             try
             {
@@ -83,9 +86,9 @@ namespace Shop.Suppliers.Application.Services
             return result;
         }
 
-        public ServiceResult SaveSuppliers(SuppliersDtoSave supplierDtoSave)
+        public ServicesResult SaveSuppliers(SuppliersDtoSave supplierDtoSave)
         {
-            ServiceResult result = new ServiceResult();
+            ServicesResult result = new ServicesResult();
 
             try
             {
@@ -115,9 +118,9 @@ namespace Shop.Suppliers.Application.Services
             return result;
         }
 
-        public ServiceResult UpdateSuppliers(SuppliersDtoUpdate suppliersDtoUpdate)
+        public ServicesResult UpdateSuppliers(SuppliersDtoUpdate suppliersDtoUpdate)
         {
-            ServiceResult result = new ServiceResult();
+            ServicesResult result = new ServicesResult();
 
             try
             {
@@ -150,9 +153,9 @@ namespace Shop.Suppliers.Application.Services
             return result;
         }
 
-        public ServiceResult GetSuppliersById(int id)
+        public ServicesResult GetSuppliersById(int id)
         {
-            ServiceResult result = new ServiceResult();
+            ServicesResult result = new ServicesResult();
 
             try
             {

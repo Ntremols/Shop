@@ -17,7 +17,7 @@ namespace Shop.Suppliers.IOC.Dependencies
             #endregion
 
             #region"Services"
-            service.AddTransient<ISuppliersService, SuppliersService>();
+            service.AddTransient<ISuppliersServices, SuppliersServices>();
             #endregion
 
 

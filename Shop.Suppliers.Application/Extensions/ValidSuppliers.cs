@@ -6,49 +6,37 @@ namespace Shop.Suppliers.Application.Extensions
 {
     public static class ValidSuppliers
     {
-        public static ServiceResult IsValidSupplier(this SuppliersDtoSave supplierDtoSave)
+        public static ServicesResult IsValidSupplier(this DtoBaseSuppliers baseSuppliers)
         {
-            ServiceResult result = new ServiceResult();
+            ServicesResult result = new ServicesResult();
 
-            if (supplierDtoSave is null)
+            if ( baseSuppliers is null)
             {
                 result.Success = false;
-                result.Message = $"El objeto {nameof(supplierDtoSave)} es requerido.";
+                result.Message = $"El objeto {nameof(baseSuppliers)} no puede ser null.";
                 return result;
             }
 
-            if (string.IsNullOrEmpty(supplierDtoSave.CompanyName))
+            if (baseSuppliers.CompanyName is null)
             {
                 result.Success = false;
                 result.Message = $"El nombre es requerido.";
                 return result;
             }
 
-            // Add additional validation rules as needed for SuppliersDtoSave
-
-            return result;
-        }
-
-        public static ServiceResult IsValidSupplier(this SuppliersDtoUpdate supplierDtoUpdate)
-        {
-            ServiceResult result = new ServiceResult();
-
-            if (supplierDtoUpdate is null)
+            if (baseSuppliers.CompanyName.Length > 45)
             {
                 result.Success = false;
-                result.Message = $"El objeto {nameof(supplierDtoUpdate)} es requerido.";
+                result.Message = "El nombre de la compania no puede ser mayor al 40";
                 return result;
             }
 
-            if (string.IsNullOrEmpty(supplierDtoUpdate.CompanyName))
+            if (baseSuppliers.ContactName is null)
             {
                 result.Success = false;
-                result.Message = $"El nombre es requerido.";
+                result.Message = "El nombre del contacto es requerido";
                 return result;
             }
-
-
-
             return result;
         }
     }

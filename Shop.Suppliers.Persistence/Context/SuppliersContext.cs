@@ -1,6 +1,7 @@
 ﻿
 
 using Microsoft.EntityFrameworkCore;
+using Shop.Suppliers.Domain.Entities;
 
 namespace Shop.Suppliers.Persistence.Context
 {
@@ -14,5 +15,14 @@ namespace Shop.Suppliers.Persistence.Context
 
         // DbSet para cada entidad del modelo de datos
         public DbSet<Domain.Entities.Suppliers> Suppliers { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Domain.Entities.Suppliers>()
+                        .ToTable("Suppliers", schema: "Production" )
+                        .HasKey(s => s.Id);
+
+            // Additional configuration if necessary
+        }
     }
 }

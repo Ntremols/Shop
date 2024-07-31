@@ -8,7 +8,7 @@ namespace Shop.Suppliers.Domain.Entities
     public class Suppliers : AuditEntity <int>
     {
         [Column("supplierid")]
-        public override int Id { get; set; }
+        public override int Id { get; set; }    
 
         public string CompanyName { get; set; }
 

@@ -1,6 +1,7 @@
 
 using Microsoft.EntityFrameworkCore;
 using Shop.Categories.Domain.Interfaces;
+using Shop.Categories.IOC.Dependencies;
 using Shop.Categories.Persistence.Context;
 using Shop.Categories.Persistence.Repositories;
 
@@ -9,7 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 var connstring = builder.Configuration.GetConnectionString("ShopContext");
 
-
+builder.Services.AddCategoriesDependency();
 
 builder.Services.AddDbContext<ShopContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("ShopContext")));
