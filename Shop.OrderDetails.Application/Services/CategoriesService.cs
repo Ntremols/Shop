@@ -28,15 +28,15 @@ namespace Shop.Categories.Application.Services
                 var categories = this.categoriesRepository.GetAll();
 
                 result.Result = (from category in categoriesRepository.GetAll()
-                                 where category.Deleted == false
+                                 where category.deleted == false
                                  select new CategoriesDtoGetAll()
                                  {
                                      CategoryId = category.Id,
                                      CategoryName = category.CategoryName,
                                      Description = category.Description,
-                                     CreationDate = category.CreationDate,
-                                     CreationUser = category.CreationUser
-                                 }).OrderByDescending(cd => cd.CreationDate).ToList();
+                                     creation_date = category.creation_date,
+                                     creation_user = category.creation_user
+                                 }).OrderByDescending(cd => cd.creation_date).ToList();
             }
             catch (Exception ex)
             {
@@ -56,15 +56,15 @@ namespace Shop.Categories.Application.Services
             {
                 result.Result = (from category in categoriesRepository.GetAll()
                                  where category.Id == id
-                                 && category.Deleted == false
+                                 && category.deleted == false
 
                                  select new CategoriesDtoGetAll()
                                  {
                                      CategoryId = category.Id,
                                      CategoryName = category.CategoryName,
                                      Description = category.Description,
-                                     CreationDate = category.CreationDate,
-                                     CreationUser = category.CreationUser
+                                     creation_date = category.creation_date,
+                                     creation_user = category.creation_user
                                  }).FirstOrDefault();
             }
             catch(Exception ex)
@@ -92,9 +92,9 @@ namespace Shop.Categories.Application.Services
                 Domain.Entities.Categories  category = new Domain.Entities.Categories()
                 {
                     Id = categoryDtoRemove.Id,
-                    Deleted = categoryDtoRemove.Deleted,
-                    DeleteDate = categoryDtoRemove.DeleteDate,
-                    DeleteUser = categoryDtoRemove.DeleteUser
+                    deleted = categoryDtoRemove.deleted,
+                    delete_date = categoryDtoRemove.delete_date,
+                    delete_user = categoryDtoRemove.delete_user
 
                 };
                 this.categoriesRepository.Remove(category);
@@ -125,9 +125,9 @@ namespace Shop.Categories.Application.Services
                 {
                     CategoryName = categoryDtoSave.CategoryName,
                     Description = categoryDtoSave.Description,
-                    CreationDate = categoryDtoSave.CreationDate,
-                    CreationUser = categoryDtoSave.CreationUser,
-                    Deleted = false
+                    creation_date = categoryDtoSave.creation_date,
+                    creation_user = categoryDtoSave.creation_user,
+                    deleted = false
                 };
 
                 this.categoriesRepository.Save(category);
@@ -163,8 +163,8 @@ namespace Shop.Categories.Application.Services
                     Id = categoriesDtoUpdate.CategoryId,
                     CategoryName = categoriesDtoUpdate.CategoryName,
                     Description = categoriesDtoUpdate.Description,
-                    ModifyDate = categoriesDtoUpdate.ModifyDate,
-                    ModifyUser = categoriesDtoUpdate.ModifyUser
+                    modify_date = categoriesDtoUpdate.modify_date,
+                    modify_user = categoriesDtoUpdate.modify_user
                 };
 
                 this.categoriesRepository.Update(category);

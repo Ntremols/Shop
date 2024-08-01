@@ -4,11 +4,11 @@ namespace Shop.Suppliers.Application.Dtos
 {
     public class SuppliersDtoGetAll
     {
-        public int SupplierId { get; set; }
-        public string CompanyName { get; set; }
-        public string ContactName { get; set; }
-        public int CreationUser {  get; set; }
-        public DateTime CreationDate { get; set; }
+        public int supplierid { get; set; }
+        public string companyname { get; set; }
+        public string contactname { get; set; }
+        public int creation_user {  get; set; }
+        public DateTime creation_date { get; set; }
 
     }
 }

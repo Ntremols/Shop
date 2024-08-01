@@ -57,7 +57,7 @@ namespace Shop.Products.Persistence.Repositories
 
                 Domain.Entities.Products? productsToRemove = this._shopContext.Products.Find(entity.Id);
 
-                productsToRemove.DeleteUser = entity.DeleteUser;
+                productsToRemove.delete_user = entity.delete_user;
                 productsToRemove.Deleted = entity.Deleted;
                 productsToRemove.DeleteDate = entity.DeleteDate;
 
@@ -101,7 +101,7 @@ namespace Shop.Products.Persistence.Repositories
                 if (productsToUpdate == null)
                     throw new ProductsException("El producto que desea actualizar no se encuentra registrada.");
 
-                productsToUpdate.ModifyDate = entity.ModifyDate;
+                productsToUpdate.modify_date = entity.modify_date;
 
                 _shopContext.Products.Update(productsToUpdate);
                 _shopContext.SaveChanges();

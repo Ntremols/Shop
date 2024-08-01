@@ -7,10 +7,10 @@ namespace Shop.Categories.Application.Dtos
         public int CategoryId { get; set; }
         public string CategoryName { get; set; }
         public string Description { get; set; }
-        public DateTime ModifyDate { get; set; }
-        public int ModifyUser { get; set; }
-        public DateTime CreationDate { get; set; }
-        public int CreationUser { get; set; }
+        public DateTime modify_date { get; set; }
+        public int modify_user { get; set; }
+        public DateTime creation_date { get; set; }
+        public int creation_user { get; set; }
 
     }
 }

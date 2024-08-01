@@ -17,21 +17,21 @@ namespace Shop.Suppliers.Application.Extensions
                 return result;
             }
 
-            if (baseSuppliers.CompanyName is null)
+            if (baseSuppliers.companyname is null)
             {
                 result.Success = false;
                 result.Message = $"El nombre es requerido.";
                 return result;
             }
 
-            if (baseSuppliers.CompanyName.Length > 45)
+            if (baseSuppliers.companyname.Length > 45)
             {
                 result.Success = false;
                 result.Message = "El nombre de la compania no puede ser mayor al 40";
                 return result;
             }
 
-            if (baseSuppliers.ContactName is null)
+            if (baseSuppliers.contactname is null)
             {
                 result.Success = false;
                 result.Message = "El nombre del contacto es requerido";

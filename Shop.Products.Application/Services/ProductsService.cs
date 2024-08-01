@@ -26,15 +26,15 @@ namespace Shop.Products.Application.Services
                 var products = this.productsRepository.GetAll();
 
                 result.Result = (from product in productsRepository.GetAll()
-                                 where product.Deleted == false
+                                 where product.deleted == false
                                  select new ProductsDtoGetAll()
                                  {
                                     ProductId = product.Id,
                                      ProductName = product.ProductName,
                                      UnitPrice = product.UnitPrice,
-                                     CreationDate = product.CreationDate,
-                                     CreationUser = product.CreationUser
-                                 }).OrderByDescending(cd => cd.CreationDate).ToList();
+                                     creation_date = product.creation_date,
+                                     creation_user = product.creation_user
+                                 }).OrderByDescending(cd => cd.creation_date).ToList();
             }
             catch (Exception ex)
             {
@@ -55,15 +55,15 @@ namespace Shop.Products.Application.Services
             {
                 result.Result = (from product in productsRepository.GetAll()
                                  where product.Id == id
-                                 && product.Deleted == false
+                                 && product.deleted == false
 
                                  select new ProductsDtoGetAll()
                                  {
                                      ProductId = product.Id,
                                      ProductName = product.ProductName,
                                      UnitPrice = product.UnitPrice,
-                                     CreationDate = product.CreationDate,
-                                     CreationUser = product.CreationUser
+                                     creation_date = product.creation_date,
+                                     creation_user = product.creation_user
                                  }).FirstOrDefault();
             }
             catch (Exception ex)
@@ -92,9 +92,9 @@ namespace Shop.Products.Application.Services
                 Domain.Entities.Products product = new Domain.Entities.Products()
                 {
                     Id = productsDtoRemove.Id,
-                    Deleted = productsDtoRemove.Deleted,
-                    DeleteDate = productsDtoRemove.DeleteTime,
-                    DeleteUser = productsDtoRemove.DeleteUser
+                    deleted = productsDtoRemove.deleted,
+                    delete_date = productsDtoRemove.DeleteTime,
+                    delete_user = productsDtoRemove.delete_user
 
                 };
                 this.productsRepository.Remove(product);
@@ -125,9 +125,9 @@ namespace Shop.Products.Application.Services
                 {
                     ProductName = productsDtoSave.ProductName,
                     UnitPrice = productsDtoSave.UnitPrice,
-                    CreationDate = productsDtoSave.CreationDate,
-                    CreationUser = productsDtoSave.CreationUser,
-                    Deleted = false
+                    creation_date = productsDtoSave.creation_date,
+                    creation_user = productsDtoSave.creation_user,
+                    deleted = false
                 };
 
                 this.productsRepository.Save(products);
@@ -162,8 +162,8 @@ namespace Shop.Products.Application.Services
                     Id = productsDtoUpdate.ProductId,
                     ProductName = productsDtoUpdate.ProductName,
                     UnitPrice = productsDtoUpdate.UnitPrice,
-                    ModifyDate = productsDtoUpdate.ModifyDate,
-                    ModifyUser = productsDtoUpdate.ModifyUser
+                    modify_date = productsDtoUpdate.modify_date,
+                    modify_user = productsDtoUpdate.modify_user
                 };
 
                 this.productsRepository.Update(products);

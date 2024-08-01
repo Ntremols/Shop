@@ -59,9 +59,9 @@ namespace Shop.Suppliers.Persistence.Repositories
 
                 Domain.Entities.Suppliers? suppliersToRemove = this._shopContext.Suppliers.Find(entity.Id);
 
-                suppliersToRemove.DeleteUser = entity.DeleteUser;
-                suppliersToRemove.Deleted = entity.Deleted;
-                suppliersToRemove.DeleteDate = entity.DeleteDate;
+                suppliersToRemove.delete_user = entity.delete_user;
+                suppliersToRemove.deleted = entity.deleted;
+                suppliersToRemove.delete_date = entity.delete_date;
 
                 _shopContext.Suppliers.Update(suppliersToRemove);
                 this._shopContext.SaveChanges();
@@ -79,7 +79,7 @@ namespace Shop.Suppliers.Persistence.Repositories
                 if (entity is null)
                     throw new ArgumentNullException("La entidad del suplidor no puede ser nulo.");
 
-                if (Exists(co => co.CompanyName.Equals(entity.CompanyName)))
+                if (Exists(co => co.companyname.Equals(entity.companyname)))
                     throw new SuppliersException("El suplidor no se encuentra registrada.");
 
                 _shopContext.Suppliers.Add(entity);
@@ -103,7 +103,7 @@ namespace Shop.Suppliers.Persistence.Repositories
                 if (suppliersToUpdate == null)
                     throw new SuppliersException("El suplidor que desea actualizar no se encuentra registrada.");
 
-                suppliersToUpdate.ModifyDate = entity.ModifyDate;
+                suppliersToUpdate.modify_date = entity.modify_date;
 
                 _shopContext.Suppliers.Update(suppliersToUpdate);
                 _shopContext.SaveChanges();

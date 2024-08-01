@@ -3,7 +3,7 @@ namespace Shop.Suppliers.Application.Dtos
 {
     public class DtoBase
     {
-        public int? ModifyUser { get; set; }
-        public DateTime ModifyDate { get; set; }
+        public int? modify_user { get; set; }
+        public DateTime modify_date { get; set; }
     }
 }

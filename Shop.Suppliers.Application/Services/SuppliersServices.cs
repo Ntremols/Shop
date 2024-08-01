@@ -29,15 +29,15 @@ namespace Shop.Suppliers.Application.Services
                 var suppliers = this.suppliersRepository.GetAll();
 
                 result.Result = (from supplier in suppliers
-                                 where supplier.Deleted == false
+                                 where supplier.deleted == false
                                  select new SuppliersDtoGetAll()
                                  {
-                                     SupplierId = supplier.Id,
-                                     CompanyName = supplier.CompanyName,
-                                     ContactName = supplier.ContactName,
-                                     CreationDate = supplier.CreationDate,
-                                     CreationUser = supplier.CreationUser
-                                 }).OrderByDescending(cd => cd.CreationDate).ToList();
+                                     supplierid = supplier.Id,
+                                     companyname = supplier.companyname,
+                                     contactname = supplier.contactname,
+                                     creation_date = supplier.creation_date,
+                                     creation_user = supplier.creation_user
+                                 }).OrderByDescending(cd => cd.creation_date).ToList();
 
                 result.Success = true; // Set success to true after successful operation
                 Console.WriteLine("here");
@@ -68,9 +68,9 @@ namespace Shop.Suppliers.Application.Services
                 Domain.Entities.Suppliers supplier = new Domain.Entities.Suppliers()
                 {
                     Id = supplierDtoRemove.Id,
-                    Deleted = supplierDtoRemove.Deleted,
-                    DeleteDate = supplierDtoRemove.DeleteDate,
-                    DeleteUser = supplierDtoRemove.DeleteUser
+                    deleted = supplierDtoRemove.deleted,
+                    delete_date = supplierDtoRemove.delete_date,
+                    delete_user = supplierDtoRemove.delete_user
 
                 };
                 this.suppliersRepository.Remove(supplier);
@@ -99,11 +99,11 @@ namespace Shop.Suppliers.Application.Services
 
                 Domain.Entities.Suppliers supplier = new Domain.Entities.Suppliers()
                 {
-                    CompanyName = supplierDtoSave.CompanyName,
-                    ContactName = supplierDtoSave.ContactName,
-                    CreationDate = supplierDtoSave.CreationDate,
-                    CreationUser = supplierDtoSave.CreationUser,
-                    Deleted = false
+                    companyname = supplierDtoSave.companyname,
+                    contactname = supplierDtoSave.contactname,
+                    creation_date = supplierDtoSave.creation_date,
+                    creation_user = supplierDtoSave.creation_user,
+                    deleted = false
                 };
 
                 this.suppliersRepository.Save(supplier);
@@ -133,11 +133,11 @@ namespace Shop.Suppliers.Application.Services
 
                 Domain.Entities.Suppliers supplier = new Domain.Entities.Suppliers()
                 {
-                    Id = suppliersDtoUpdate.SupplierId,
-                    CompanyName = suppliersDtoUpdate.CompanyName,
-                    ContactName = suppliersDtoUpdate.ContactName,
-                    ModifyDate = suppliersDtoUpdate.ModifyDate,
-                    ModifyUser = suppliersDtoUpdate.ModifyUser
+                    Id = suppliersDtoUpdate.supplierid,
+                    companyname = suppliersDtoUpdate.companyname,
+                    contactname = suppliersDtoUpdate.contactname,
+                    modify_date = suppliersDtoUpdate.modify_date,
+                    modify_user = suppliersDtoUpdate.modify_user
                 };
 
                 this.suppliersRepository.Update(supplier);
@@ -161,15 +161,15 @@ namespace Shop.Suppliers.Application.Services
             {
                 result.Result = (from supplier in suppliersRepository.GetAll()
                                  where supplier.Id == id
-                                 && supplier.Deleted == false
+                                 && supplier.deleted == false
 
                                  select new SuppliersDtoGetAll()
                                  {
-                                     SupplierId = supplier.Id,
-                                     CompanyName = supplier.CompanyName,
-                                     ContactName = supplier.ContactName,
-                                     CreationDate = supplier.CreationDate,
-                                     CreationUser = supplier.CreationUser
+                                     supplierid = supplier.Id,
+                                     companyname = supplier.companyname,
+                                     contactname = supplier.contactname,
+                                     creation_date = supplier.creation_date,
+                                     creation_user = supplier.creation_user
                                  }).FirstOrDefault();
             }
             catch (Exception ex)

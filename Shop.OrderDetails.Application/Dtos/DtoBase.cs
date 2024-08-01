@@ -5,7 +5,7 @@ namespace Shop.Categories.Application.Dtos
 {
     public abstract class DtoBase
     {
-        public int? ModifyUser { get; set; }
+        public int? modify_user { get; set; }
         public DateTime?  MofidyDate { get; set; }
     }
 }

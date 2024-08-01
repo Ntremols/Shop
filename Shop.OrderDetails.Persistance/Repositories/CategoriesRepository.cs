@@ -59,7 +59,7 @@ namespace Shop.Categories.Persistence.Repositories
 
                 Domain.Entities.Categories? categoriesToRemove = this._shopContext.Categories.Find(entity.Id);
 
-                categoriesToRemove.DeleteUser = entity.DeleteUser;
+                categoriesToRemove.delete_user = entity.delete_user;
                 categoriesToRemove.Deleted = entity.Deleted;
                 categoriesToRemove.DeleteDate = entity.DeleteDate;
 
@@ -103,7 +103,7 @@ namespace Shop.Categories.Persistence.Repositories
                 if (categoriesToUpdate == null)
                     throw new CategoriesException("La categoria que desea actualizar no se encuentra registrada.");
 
-                categoriesToUpdate.ModifyDate = entity.ModifyDate;
+                categoriesToUpdate.modify_date = entity.modify_date;
 
                 _shopContext.Categories.Update(categoriesToUpdate);
                 _shopContext.SaveChanges();

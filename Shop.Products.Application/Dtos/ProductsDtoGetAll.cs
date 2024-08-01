@@ -6,7 +6,7 @@ namespace Shop.Products.Application.Dtos
         public int ProductId { get; set; }
         public string ProductName { get; set; }
         public int UnitPrice { get; set; }
-        public int CreationUser { get; set; }
-        public DateTime CreationDate { get; set; }
+        public int creation_user { get; set; }
+        public DateTime creation_date { get; set; }
     }
 }
