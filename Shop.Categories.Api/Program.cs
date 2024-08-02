@@ -10,15 +10,13 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 var connstring = builder.Configuration.GetConnectionString("ShopContext");
 
-builder.Services.AddCategoriesDependency();
-
 builder.Services.AddDbContext<ShopContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("ShopContext")));
 
 // add dependency objeto de datos
 builder.Services.AddScoped<ICategoriesRepository, CategoriesRepository>();
 
-
+builder.Services.AddCategoriesDependency();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

@@ -1,9 +1,9 @@
 ﻿
-namespace Shop.Categories.Application.Base
+namespace Shop.Products.Application.Base
 {
-    public class ServiceResult
+    public class ServicesResult
     {
-        public ServiceResult() => this.Success = true;
+        public ServicesResult() => this.Success = true;
         public string? Message { get; set; }
         public bool Success { get; set; }
         public dynamic? Result { get; set; }

@@ -58,8 +58,8 @@ namespace Shop.Products.Persistence.Repositories
                 Domain.Entities.Products? productsToRemove = this._shopContext.Products.Find(entity.Id);
 
                 productsToRemove.delete_user = entity.delete_user;
-                productsToRemove.Deleted = entity.Deleted;
-                productsToRemove.DeleteDate = entity.DeleteDate;
+                productsToRemove.deleted = entity.deleted;
+                productsToRemove.delete_date = entity.delete_date;
 
                 _shopContext.Products.Update(productsToRemove);
                 this._shopContext.SaveChanges();
@@ -77,7 +77,7 @@ namespace Shop.Products.Persistence.Repositories
                 if (entity is null)
                     throw new ArgumentNullException("La entidad del producto no puede ser nulo.");
 
-                if (Exists(co => co.ProductName.Equals(entity.ProductName)))
+                if (Exists(co => co.productname.Equals(entity.productname)))
                     throw new ProductsException("El producto no se encuentra registrado.");
 
                 _shopContext.Products.Add(entity);

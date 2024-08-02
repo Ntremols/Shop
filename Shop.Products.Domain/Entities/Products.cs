@@ -9,7 +9,7 @@ namespace Shop.Products.Domain.Entities
     {
         [Column("productid")]
         public override int Id { get ; set ; }
-        public string ProductName {  get; set; }
-        public int UnitPrice { get; set; }
+        public string productname {  get; set; }
+        public int unitprice { get; set; }
     }
 }

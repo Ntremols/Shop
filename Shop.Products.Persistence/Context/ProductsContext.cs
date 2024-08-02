@@ -14,5 +14,12 @@ namespace Shop.Products.Persistence.Context
 
         // DbSet para cada entidad del modelo de datos
         public DbSet<Domain.Entities.Products> Products { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Domain.Entities.Products>()
+                        .ToTable("Products", schema: "Production")
+                        .HasKey(s => s.Id);
+        }
     }
 }

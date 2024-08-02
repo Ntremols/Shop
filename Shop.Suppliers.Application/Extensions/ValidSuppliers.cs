@@ -17,26 +17,28 @@ namespace Shop.Suppliers.Application.Extensions
                 return result;
             }
 
-            if (baseSuppliers.companyname is null)
+            if (string.IsNullOrEmpty(baseSuppliers.companyname))
             {
                 result.Success = false;
-                result.Message = $"El nombre es requerido.";
+                result.Message = $"El nombre de la compania es requerido.";
                 return result;
             }
 
             if (baseSuppliers.companyname.Length > 45)
             {
                 result.Success = false;
-                result.Message = "El nombre de la compania no puede ser mayor al 40";
+                result.Message = "El nombre de la compania no puede ser mayor al 45";
                 return result;
             }
 
-            if (baseSuppliers.contactname is null)
+            if (string.IsNullOrEmpty(baseSuppliers.contactname))
             {
                 result.Success = false;
                 result.Message = "El nombre del contacto es requerido";
                 return result;
             }
+            result.Success = true;
+            result.Message = "Sus resultados han sido validados con exito.";
             return result;
         }
     }

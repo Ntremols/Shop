@@ -6,25 +6,25 @@ namespace Shop.Categories.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CategoriesController : ControllerBase
+    public class CategoriesController : Controller
     {
-        private readonly ICategoriesService categoriesService;
+        private readonly ICategoriesServices categoriesServices;
 
-        public CategoriesController(ICategoriesService categoriesService)
+        public CategoriesController(ICategoriesServices categoriesServices)
         {
-            this.categoriesService = categoriesService;
+            this.categoriesServices = categoriesServices;
         }
 
    
         [HttpGet("GetCategories")]
         public IActionResult Get()
         {
-            var result = this.categoriesService.GetCategories();
+            var result = this.categoriesServices.GetCategories();
             if (!result.Success)
             {
                 return BadRequest(result);
             }
-            else 
+     
                 return Ok(result);
         }
 
@@ -32,12 +32,12 @@ namespace Shop.Categories.Api.Controllers
         [HttpGet("GetCategoriesById")]
         public IActionResult Get(int id)
         {
-            var result = this.categoriesService.GetCategoryById(id);
+            var result = this.categoriesServices.GetCategoryById(id);
             if (!result.Success)
             {
                 return BadRequest(result);
             }
-            else
+       
                 return Ok(result);
         }
 
@@ -45,12 +45,12 @@ namespace Shop.Categories.Api.Controllers
         [HttpPost("SaveCategories")]
         public IActionResult Post([FromBody] CategoriesDtoSave dtoSave)
         {
-            var result = this.categoriesService.SaveCategories(dtoSave);
+            var result = this.categoriesServices.SaveCategories(dtoSave);
             if (!result.Success)
             {
                 return BadRequest(result);
             }
-            else
+         
                 return Ok(result);
         }
 
@@ -58,12 +58,12 @@ namespace Shop.Categories.Api.Controllers
         [HttpPost("UpdateCategories")]
         public IActionResult Put(CategoriesDtoUpdate dtoUpdate)
         {
-            var result = this.categoriesService.UpdateCategories(dtoUpdate);
+            var result = this.categoriesServices.UpdateCategories(dtoUpdate);
             if (!result.Success)
             {
                 return BadRequest(result);
             }
-            else
+           
                 return Ok(result);
         }
 
@@ -71,12 +71,12 @@ namespace Shop.Categories.Api.Controllers
         [HttpPost("DeleteCategories")]
         public IActionResult Delete(CategoriesDtoRemove dtoRemove)
         {
-            var result = this.categoriesService.RemoveCategories(dtoRemove);
+            var result = this.categoriesServices.RemoveCategories(dtoRemove);
             if (!result.Success)
             {
                 return BadRequest(result);
             }
-            else
+        
                 return Ok(result);
         }
     }

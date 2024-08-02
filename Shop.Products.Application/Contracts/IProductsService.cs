@@ -3,12 +3,12 @@ using Shop.Products.Application.Dtos;
 
 namespace Shop.Products.Application.Contracts
 {
-    public interface IProductsService
+    public interface IproductsServices
     {
-        ServiceResult GetProducts();
-        ServiceResult GetProductsById(int id);
-        ServiceResult UpdateProducts(ProductsDtoUpdate productsDtoUpdate);
-        ServiceResult RemoveProducts(ProductsDtoRemove productsDtoRemove);
-        ServiceResult SaveProducts(ProductsDtoSave productsDtoSave);
+        ServicesResult GetProducts();
+        ServicesResult GetProductsById(int id);
+        ServicesResult UpdateProducts(ProductsDtoUpdate productsDtoUpdate);
+        ServicesResult RemoveProducts(ProductsDtoRemove productsDtoRemove);
+        ServicesResult SaveProducts(ProductsDtoSave productsDtoSave);
     }
 }

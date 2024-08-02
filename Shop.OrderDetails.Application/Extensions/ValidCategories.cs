@@ -6,50 +6,49 @@ namespace Shop.Categories.Application.Extensions
 {
     public static class ValidCategories
     {
-        public static ServiceResult IsValidCategory(this CategoriesDtoSave categoryDtoSave)
+        public static ServicesResult IsValidCategory(this DtoBaseCategories baseCategory)
         {
-            ServiceResult result = new ServiceResult();
+            ServicesResult result = new ServicesResult();
 
-            if (categoryDtoSave is null)
+            if (baseCategory is null)
             {
                 result.Success = false;
-                result.Message = $"El objeto {nameof(categoryDtoSave)} es requerido.";
+                result.Message = $"El objeto {nameof(baseCategory)} es requerido.";
                 return result;
             }
 
-            if (string.IsNullOrEmpty(categoryDtoSave.CategoryName))
+            if (string.IsNullOrEmpty(baseCategory.categoryname))
             {
                 result.Success = false;
                 result.Message = $"El nombre de la categoría es requerido.";
                 return result;
             }
 
-            // Add additional validation rules as needed for CategoriesDtoSave
-
-            return result;
-        }
-
-        public static ServiceResult IsValidCategory(this CategoriesDtoUpdate categoryDtoUpdate)
-        {
-            ServiceResult result = new ServiceResult();
-
-            if (categoryDtoUpdate is null)
+            if (baseCategory.categoryname.Length > 40)
             {
                 result.Success = false;
-                result.Message = $"El objeto {nameof(categoryDtoUpdate)} es requerido.";
+                result.Message = $"El nombre de la categoria no puede ser mayor a 40 caracteres.";
+                return result;
+            } 
+
+            if (string.IsNullOrEmpty(baseCategory.description))
+            {
+                result.Success = false;
+                result.Message = $"La descripcion es requerida.";
                 return result;
             }
 
-            if (string.IsNullOrEmpty(categoryDtoUpdate.CategoryName))
+            if (baseCategory.description.Length > 90)
             {
                 result.Success = false;
-                result.Message = $"El nombre de la categoría es requerido.";
+                result.Message = $"La descripcion no puede ser mayor a 90 caracteres.";
                 return result;
             }
 
-
-
+            result.Success = true;
+            result.Message = "Sus datos han sido validados con exito.";
             return result;
+
         }
     }
 }

@@ -3,47 +3,40 @@
 using Shop.Products.Application.Base;
 using Shop.Products.Application.Dtos;
 
+
 namespace Shop.Products.Application.Extensions
 {
     public static class ValidProducts
     {
-        public static ServiceResult IsValidProduct(this ProductsDtoSave productsDtoSave)
+        public static ServicesResult IsValidProduct(this DtoBaseProducts baseProducts)
         {
-            ServiceResult result = new ServiceResult();
-            if (productsDtoSave is null)
+            ServicesResult result = new ServicesResult();
+
+            if (baseProducts is null)
             {
                 result.Success = false;
-                result.Message = $"El objeto {nameof(productsDtoSave)} es requerido.";
+                result.Message = $"El objeto {nameof(baseProducts)} es requerido.";
                 return result;
             }
-
-            if (string.IsNullOrEmpty(productsDtoSave.ProductName))
+           
+            if (string.IsNullOrEmpty(baseProducts.productname))
             {
-                result.Success = false;
+                result.Success= false;
                 result.Message = $"El nombre del producto es requerido.";
                 return result;
             }
-                // Add additional validation rules as needed for ProductsDtoSave
 
-                return result;
-            }
-
-            public static ServiceResult IsValidProduct(this ProductsDtoUpdate productsDtoUpdate)
+            if (baseProducts.productname.Length > 50)
             {
-                ServiceResult result = new ServiceResult();
-                if (productsDtoUpdate is null)
-                {
-                    result.Success= false;
-                    result.Message = $"El objeto {nameof(productsDtoUpdate)} es requerido.";
-                    return result;
-                }
-
-                if (string.IsNullOrEmpty (productsDtoUpdate.ProductName))
-                {
-                    result.Success = false;
-                result.Message = $"El nombre del producto es requerido.";
-                }  
+                result.Success = false;
+                result.Message = $"El nombre del producto no puede ser mayor a 50 caracteres.";
                 return result;
+            }  
+
+
+            result.Success = true;
+            result.Message = "Sus resultados han sido validados con exito.";
+            return result;
         }
     }
 }

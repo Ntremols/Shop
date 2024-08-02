@@ -30,6 +30,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{1B1E1FEC-4189-42F8-B41E-D5F89ABFD53D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Persistence", "Persistence", "{7C0E2324-0A81-45CC-B425-9513AB8FD5C3}"
+	ProjectSection(SolutionItems) = preProject
+		Shop.OrderDetails.Persistance\Context\CategoriesContext.cs = Shop.OrderDetails.Persistance\Context\CategoriesContext.cs
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shop.Categories.Application", "Shop.OrderDetails.Application\Shop.Categories.Application.csproj", "{F78914A2-8459-4D01-8437-E76970FD65DC}"
 EndProject
@@ -90,7 +93,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop.WebApp", "Shop.WebApp\Shop.WebApp.csproj", "{37985950-D199-4FAA-ABEF-C6EBC25ADA73}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shop.WebApp", "Shop.WebApp\Shop.WebApp.csproj", "{37985950-D199-4FAA-ABEF-C6EBC25ADA73}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

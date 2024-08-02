@@ -60,8 +60,8 @@ namespace Shop.Categories.Persistence.Repositories
                 Domain.Entities.Categories? categoriesToRemove = this._shopContext.Categories.Find(entity.Id);
 
                 categoriesToRemove.delete_user = entity.delete_user;
-                categoriesToRemove.Deleted = entity.Deleted;
-                categoriesToRemove.DeleteDate = entity.DeleteDate;
+                categoriesToRemove.deleted = entity.deleted;
+                categoriesToRemove.delete_date = entity.delete_date;
 
                 _shopContext.Categories.Update(categoriesToRemove);
                 this._shopContext.SaveChanges();
@@ -79,7 +79,7 @@ namespace Shop.Categories.Persistence.Repositories
                 if (entity is null)
                     throw new ArgumentNullException("La entidad de la categoria no puede ser nulo.");
 
-                if (Exists(co => co.CategoryName.Equals(entity.CategoryName)))
+                if (Exists(co => co.categoryname.Equals(entity.categoryname)))
                     throw new CategoriesException("La categoria no se encuentra registrada.");
 
                 _shopContext.Categories.Add(entity);

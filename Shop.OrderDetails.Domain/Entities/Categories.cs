@@ -8,7 +8,7 @@ namespace Shop.Categories.Domain.Entities
     {
         [Column("categoryid")]
         public override int Id { get; set; }
-        public string CategoryName { get; set; }
-        public string Description { get; set; }
+        public string categoryname { get; set; }
+        public string description { get; set; }
     }
 }

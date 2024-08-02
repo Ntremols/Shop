@@ -4,9 +4,9 @@ namespace Shop.Products.Application.Dtos
 {
     public abstract class DtoBaseProducts
     {
-        public int ProductId { get; set; }
-        public string ProductName { get; set; }
-        public int UnitPrice { get; set; }
+        public int productid { get; set; }
+        public string productname { get; set; }
+        public int unitprice { get; set; }
         public DateTime? modify_date { get; set; }
         public int? modify_user {  get; set; }
         public DateTime creation_date { get; set; }

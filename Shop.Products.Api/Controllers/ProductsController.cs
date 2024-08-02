@@ -6,73 +6,73 @@ namespace Shop.Products.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductsController : ControllerBase
+    public class ProductsController : Controller
     {
-        private readonly IProductsService productsService;
+        private readonly IproductsServices productsServices;
 
-        public ProductsController(IProductsService productsService)
+        public ProductsController(IproductsServices productsServices)
         {
-            this.productsService = productsService;
+            this.productsServices = productsServices;
         }
 
        
         [HttpGet("GetProducts")]
         public IActionResult Get()
         {
-            var result = this.productsService.GetProducts();
+            var result = this.productsServices.GetProducts();
             if (!result.Success)
             {
                 return BadRequest(result);
             }
-            else
+           
                 return Ok(result);
         }
 
         [HttpPost("GetProductsById")]
         public IActionResult Get(int id)
         {
-            var result = this.productsService.GetProductsById(id);
+            var result = this.productsServices.GetProductsById(id);
             if (!result.Success)
             {
                 return BadRequest(result);
             }
-            else
+          
                 return Ok(result);
         }
 
         [HttpPost("SaveProducts")]
         public IActionResult Post([FromBody] ProductsDtoSave dtoSave)
         {
-            var result = this.productsService.SaveProducts(dtoSave);
+            var result = this.productsServices.SaveProducts(dtoSave);
             if (!result.Success)
             {
                 return BadRequest(result);
             }
-            else
+          
                 return Ok(result);
         }
 
         [HttpPut("UpdateProducts")]
         public IActionResult Put(ProductsDtoUpdate dtoUpdate)
         {
-            var result = this.productsService.UpdateProducts(dtoUpdate);
+            var result = this.productsServices.UpdateProducts(dtoUpdate);
             if (!result.Success)
             {
                 return BadRequest(result);
             }
-            else
+      
                 return Ok(result);
         }
 
         [HttpPost("DeleteProducts")]
         public IActionResult Delete(ProductsDtoRemove dtoRemove)
         {
-            var result = this.productsService.RemoveProducts(dtoRemove);
+            var result = this.productsServices.RemoveProducts(dtoRemove);
             if (!result.Success)
             {
                 return BadRequest(result);
             }
-            else
+          
                 return Ok(result);
         }
     }

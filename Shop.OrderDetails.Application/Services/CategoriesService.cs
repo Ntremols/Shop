@@ -9,20 +9,20 @@ using Shop.Categories.Domain.Entities;
 
 namespace Shop.Categories.Application.Services
 {
-    public class CategoriesService : ICategoriesService
+    public class CategoriesServices : ICategoriesServices
     {
         private readonly ICategoriesRepository categoriesRepository;
-        private readonly ILogger<CategoriesService> logger;
+        private readonly ILogger<CategoriesServices> logger;
 
-        public CategoriesService(ICategoriesRepository categoriesRepository, ILogger<CategoriesService> logger)
+        public CategoriesServices(ICategoriesRepository categoriesRepository, ILogger<CategoriesServices> logger)
         {
             this.categoriesRepository = categoriesRepository;
             this.logger = logger;
         }
 
-        public ServiceResult GetCategories()
+        public ServicesResult GetCategories()
         {
-            ServiceResult result = new ServiceResult();
+            ServicesResult result = new ServicesResult();
             try
             {
                 var categories = this.categoriesRepository.GetAll();
@@ -31,9 +31,9 @@ namespace Shop.Categories.Application.Services
                                  where category.deleted == false
                                  select new CategoriesDtoGetAll()
                                  {
-                                     CategoryId = category.Id,
-                                     CategoryName = category.CategoryName,
-                                     Description = category.Description,
+                                     categoryid = category.Id,
+                                     categoryname = category.categoryname,
+                                     description = category.description,
                                      creation_date = category.creation_date,
                                      creation_user = category.creation_user
                                  }).OrderByDescending(cd => cd.creation_date).ToList();
@@ -48,9 +48,9 @@ namespace Shop.Categories.Application.Services
            
         }
 
-        public ServiceResult GetCategoryById(int id)
+        public ServicesResult GetCategoryById(int id)
         {
-            ServiceResult result = new ServiceResult();
+            ServicesResult result = new ServicesResult();
 
             try
             {
@@ -60,9 +60,9 @@ namespace Shop.Categories.Application.Services
 
                                  select new CategoriesDtoGetAll()
                                  {
-                                     CategoryId = category.Id,
-                                     CategoryName = category.CategoryName,
-                                     Description = category.Description,
+                                     categoryid = category.Id,
+                                     categoryname = category.categoryname,
+                                     description = category.description,
                                      creation_date = category.creation_date,
                                      creation_user = category.creation_user
                                  }).FirstOrDefault();
@@ -76,9 +76,9 @@ namespace Shop.Categories.Application.Services
             return result;
             }
 
-        public ServiceResult RemoveCategories(CategoriesDtoRemove categoryDtoRemove)
+        public ServicesResult RemoveCategories(CategoriesDtoRemove categoryDtoRemove)
         {
-            ServiceResult result = new ServiceResult();
+            ServicesResult result = new ServicesResult();
 
             try
             {
@@ -110,9 +110,9 @@ namespace Shop.Categories.Application.Services
             return result;
         }
 
-        public ServiceResult SaveCategories(CategoriesDtoSave categoryDtoSave)
+        public ServicesResult SaveCategories(CategoriesDtoSave categoryDtoSave)
         {
-           ServiceResult result = new ServiceResult();
+           ServicesResult result = new ServicesResult();
 
             try
             {
@@ -123,8 +123,8 @@ namespace Shop.Categories.Application.Services
 
                 Domain.Entities.Categories category = new Domain.Entities.Categories()
                 {
-                    CategoryName = categoryDtoSave.CategoryName,
-                    Description = categoryDtoSave.Description,
+                    categoryname = categoryDtoSave.categoryname,
+                    description = categoryDtoSave.description,
                     creation_date = categoryDtoSave.creation_date,
                     creation_user = categoryDtoSave.creation_user,
                     deleted = false
@@ -144,10 +144,10 @@ namespace Shop.Categories.Application.Services
 
 
 
-        public ServiceResult UpdateCategories(CategoriesDtoUpdate categoriesDtoUpdate)
+        public ServicesResult UpdateCategories(CategoriesDtoUpdate categoriesDtoUpdate)
         {
 
-            ServiceResult result = new ServiceResult();
+            ServicesResult result = new ServicesResult();
 
             try
             {
@@ -160,9 +160,9 @@ namespace Shop.Categories.Application.Services
 
                 Domain.Entities.Categories category = new Domain.Entities.Categories()
                 {
-                    Id = categoriesDtoUpdate.CategoryId,
-                    CategoryName = categoriesDtoUpdate.CategoryName,
-                    Description = categoriesDtoUpdate.Description,
+                    Id = categoriesDtoUpdate.categoryid,
+                    categoryname = categoriesDtoUpdate.categoryname,
+                    description = categoriesDtoUpdate.description,
                     modify_date = categoriesDtoUpdate.modify_date,
                     modify_user = categoriesDtoUpdate.modify_user
                 };
@@ -177,8 +177,6 @@ namespace Shop.Categories.Application.Services
                 result.Message = "Error actualizando la categoria.";
                 this.logger.LogError(message: result.Message, ex.ToString());
             }
-
-
             return result;
             
         }

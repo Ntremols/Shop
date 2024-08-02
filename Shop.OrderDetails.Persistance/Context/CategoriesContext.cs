@@ -14,5 +14,14 @@ namespace Shop.Categories.Persistence.Context
 
         // DbSet para cada entidad del modelo de datos
         public DbSet<Domain.Entities.Categories> Categories { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Domain.Entities.Categories>()
+                        .ToTable("Categories", schema: "Production")
+                        .HasKey(s => s.Id);
+
+            // Additional configuration if necessary
+        }
     }
 }

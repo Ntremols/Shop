@@ -9,14 +9,14 @@ namespace Shop.Categories.IOC.Dependencies
 {
     public static class CategoriesDependency
     {
-        public static void AddCategoriesDependency(this IServiceCollection service)
+        public static void AddCategoriesDependency(this IServiceCollection services)
         {
             #region"Repositories"
-            service.AddScoped<ICategoriesRepository, CategoriesRepository>();
+            services.AddScoped<ICategoriesRepository, CategoriesRepository>();
             #endregion
 
             #region "Services"
-            service.AddTransient<ICategoriesService, CategoriesService>();
+            services.AddTransient<ICategoriesServices, CategoriesServices>();
             #endregion
         }
     }

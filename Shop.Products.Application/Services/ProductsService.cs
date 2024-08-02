@@ -7,20 +7,20 @@ using Shop.Products.Domain.Interfaces;
 
 namespace Shop.Products.Application.Services
 {
-    public class ProductsService : IProductsService
+    public class productsServices : IproductsServices
     {
         private readonly IProductsRepository productsRepository;
-        private readonly ILogger<ProductsService> logger;
+        private readonly ILogger<productsServices> logger;
 
-        public ProductsService(IProductsRepository productsRepository, ILogger<ProductsService> logger)
+        public productsServices(IProductsRepository productsRepository, ILogger<productsServices> logger)
         {
             this.productsRepository = productsRepository;
             this.logger = logger;
         }
 
-        public ServiceResult GetProducts()
+        public ServicesResult GetProducts()
         {
-            ServiceResult result = new ServiceResult();
+            ServicesResult result = new ServicesResult();
             try
             {
                 var products = this.productsRepository.GetAll();
@@ -29,9 +29,9 @@ namespace Shop.Products.Application.Services
                                  where product.deleted == false
                                  select new ProductsDtoGetAll()
                                  {
-                                    ProductId = product.Id,
-                                     ProductName = product.ProductName,
-                                     UnitPrice = product.UnitPrice,
+                                    productid = product.Id,
+                                     productname = product.productname,
+                                     unitprice = product.unitprice,
                                      creation_date = product.creation_date,
                                      creation_user = product.creation_user
                                  }).OrderByDescending(cd => cd.creation_date).ToList();
@@ -47,9 +47,9 @@ namespace Shop.Products.Application.Services
         }
 
 
-        public ServiceResult GetProductById(int id)
+        public ServicesResult GetProductById(int id)
         {
-            ServiceResult result = new ServiceResult();
+            ServicesResult result = new ServicesResult();
 
             try
             {
@@ -59,9 +59,9 @@ namespace Shop.Products.Application.Services
 
                                  select new ProductsDtoGetAll()
                                  {
-                                     ProductId = product.Id,
-                                     ProductName = product.ProductName,
-                                     UnitPrice = product.UnitPrice,
+                                     productid = product.Id,
+                                     productname = product.productname,
+                                     unitprice = product.unitprice,
                                      creation_date = product.creation_date,
                                      creation_user = product.creation_user
                                  }).FirstOrDefault();
@@ -76,9 +76,9 @@ namespace Shop.Products.Application.Services
         }
 
 
-        public ServiceResult RemoveProducts(ProductsDtoRemove productsDtoRemove)
+        public ServicesResult RemoveProducts(ProductsDtoRemove productsDtoRemove)
         {
-            ServiceResult result = new ServiceResult();
+            ServicesResult result = new ServicesResult();
 
             try
             {
@@ -93,7 +93,7 @@ namespace Shop.Products.Application.Services
                 {
                     Id = productsDtoRemove.Id,
                     deleted = productsDtoRemove.deleted,
-                    delete_date = productsDtoRemove.DeleteTime,
+                    delete_date = productsDtoRemove.delete_date,
                     delete_user = productsDtoRemove.delete_user
 
                 };
@@ -110,9 +110,9 @@ namespace Shop.Products.Application.Services
             return result;
         }
 
-        public ServiceResult SaveProducts(ProductsDtoSave productsDtoSave)
+        public ServicesResult SaveProducts(ProductsDtoSave productsDtoSave)
         {
-            ServiceResult result = new ServiceResult();
+            ServicesResult result = new ServicesResult();
 
             try
             {
@@ -123,8 +123,8 @@ namespace Shop.Products.Application.Services
 
                 Domain.Entities.Products products = new Domain.Entities.Products()
                 {
-                    ProductName = productsDtoSave.ProductName,
-                    UnitPrice = productsDtoSave.UnitPrice,
+                    productname = productsDtoSave.productname,
+                    unitprice = productsDtoSave.unitprice,
                     creation_date = productsDtoSave.creation_date,
                     creation_user = productsDtoSave.creation_user,
                     deleted = false
@@ -143,10 +143,10 @@ namespace Shop.Products.Application.Services
         }
 
 
-        public ServiceResult UpdateProducts(ProductsDtoUpdate productsDtoUpdate)
+        public ServicesResult UpdateProducts(ProductsDtoUpdate productsDtoUpdate)
         {
 
-            ServiceResult result = new ServiceResult();
+            ServicesResult result = new ServicesResult();
 
             try
             {
@@ -159,9 +159,9 @@ namespace Shop.Products.Application.Services
 
                 Domain.Entities.Products products = new Domain.Entities.Products()
                 {
-                    Id = productsDtoUpdate.ProductId,
-                    ProductName = productsDtoUpdate.ProductName,
-                    UnitPrice = productsDtoUpdate.UnitPrice,
+                    Id = productsDtoUpdate.productid,
+                    productname = productsDtoUpdate.productname,
+                    unitprice = productsDtoUpdate.unitprice,
                     modify_date = productsDtoUpdate.modify_date,
                     modify_user = productsDtoUpdate.modify_user
                 };
@@ -182,7 +182,7 @@ namespace Shop.Products.Application.Services
 
         }
 
-        public ServiceResult GetProductsById(int id)
+        public ServicesResult GetProductsById(int id)
         {
             throw new NotImplementedException();
         }

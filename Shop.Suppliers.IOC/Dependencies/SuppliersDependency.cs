@@ -10,14 +10,14 @@ namespace Shop.Suppliers.IOC.Dependencies
 {
     public static class SuppliersDependency
     {
-        public static void AddSuppliersDependency(this IServiceCollection service)
+        public static void AddSuppliersDependency(this IServiceCollection services)
         {
             #region"Repository"
-            service.AddScoped<ISuppliersRepository, SuppliersRepository>();
+            services.AddScoped<ISuppliersRepository, SuppliersRepository>();
             #endregion
 
             #region"Services"
-            service.AddTransient<ISuppliersServices, SuppliersServices>();
+            services.AddTransient<ISuppliersServices, SuppliersServices>();
             #endregion
 
 
