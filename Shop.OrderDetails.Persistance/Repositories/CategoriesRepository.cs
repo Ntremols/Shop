@@ -49,7 +49,12 @@ namespace Shop.Categories.Persistence.Repositories
             }
             return category;
         }
-        
+
+        public List<Domain.Entities.Categories> GetEntityById(int Id)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Remove(Domain.Entities.Categories entity)
         {
             try

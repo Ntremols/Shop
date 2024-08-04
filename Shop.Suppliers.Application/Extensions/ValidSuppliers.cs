@@ -6,9 +6,9 @@ namespace Shop.Suppliers.Application.Extensions
 {
     public static class ValidSuppliers
     {
-        public static ServicesResult IsValidSupplier(this DtoBaseSuppliers baseSuppliers)
+        public static ServicesResult<DtoBaseSuppliers> IsValidSupplier(this DtoBaseSuppliers baseSuppliers)
         {
-            ServicesResult result = new ServicesResult();
+            ServicesResult<DtoBaseSuppliers> result = new ServicesResult<DtoBaseSuppliers>();
 
             if ( baseSuppliers is null)
             {

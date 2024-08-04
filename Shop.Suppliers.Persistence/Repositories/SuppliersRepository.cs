@@ -4,6 +4,9 @@ using Shop.Suppliers.Persistence.Context;
 using System.Linq.Expressions;
 using Shop.Suppliers.Persistence.Exceptions;
 using Microsoft.Extensions.Logging;
+using System.Diagnostics.Metrics;
+using System.Net;
+using System.Numerics;
 
 namespace Shop.Suppliers.Persistence.Repositories
 {
@@ -27,28 +30,18 @@ namespace Shop.Suppliers.Persistence.Repositories
             return this._shopContext.Suppliers.ToList();
         }
 
-        public List<Domain.Entities.Suppliers> GetSuppliersById(int Id)
+        public List<Domain.Entities.Suppliers> GetEntityById(int Id)
         {
-            throw new NotImplementedException();
-        }
 
-        public Domain.Entities.Suppliers GetEntityBy(int Id)
-        {
-            Domain.Entities.Suppliers? suppliers = null;
-            try
+            /*if (suppliers == null)
             {
-                suppliers = this._shopContext.Suppliers.Find(Id);
+                throw new SuppliersException($"El suplidor no se ha encontrado.{Id}");
+            }
+            var suppliersList = new List<Domain.Entities.Suppliers>{ suppliers };*/
 
-                if (suppliers is null)
-                    throw new SuppliersException("El suplidor no se ha encontrado.");
-                return suppliers;
-            }
-            catch (Exception ex)
-            {
-                this._logger.LogError("Error para encontrar el suplidor.", ex.ToString());
-            }
-            return suppliers;
+            return _shopContext.Suppliers.Where(s => s.Id.Equals(Id)).ToList();
         }
+        
 
         public void Remove(Domain.Entities.Suppliers entity)
         {
@@ -80,7 +73,7 @@ namespace Shop.Suppliers.Persistence.Repositories
                     throw new ArgumentNullException("La entidad del suplidor no puede ser nulo.");
 
                 if (Exists(co => co.companyname.Equals(entity.companyname)))
-                    throw new SuppliersException("El suplidor no se encuentra registrada.");
+                    throw new SuppliersException("El suplidor se encuentra registrado.");
 
                 _shopContext.Suppliers.Add(entity);
                 _shopContext.SaveChanges();
@@ -103,6 +96,17 @@ namespace Shop.Suppliers.Persistence.Repositories
                 if (suppliersToUpdate == null)
                     throw new SuppliersException("El suplidor que desea actualizar no se encuentra registrada.");
 
+                suppliersToUpdate.companyname = entity.companyname;
+                suppliersToUpdate.contactname = entity.contactname;
+                suppliersToUpdate.contacttitle = entity.contacttitle;
+                suppliersToUpdate.address = entity.address;
+                suppliersToUpdate.city = entity.city;
+                suppliersToUpdate.region = entity.region;
+                suppliersToUpdate.postalcode = entity.postalcode;
+                suppliersToUpdate.country = entity.country;
+                suppliersToUpdate.phone = entity.phone;
+                suppliersToUpdate.fax = entity.fax;
+                suppliersToUpdate.modify_user = entity.modify_user;
                 suppliersToUpdate.modify_date = entity.modify_date;
 
                 _shopContext.Suppliers.Update(suppliersToUpdate);

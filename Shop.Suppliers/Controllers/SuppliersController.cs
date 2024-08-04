@@ -24,8 +24,8 @@ namespace Shop.Suppliers.Api.Controllers
             {
                 return BadRequest(result);
             }
-           
-                return Ok(result);
+
+            return Ok(result);
         }
 
         [HttpGet("GetSuppliersById")]
@@ -72,7 +72,6 @@ namespace Shop.Suppliers.Api.Controllers
             {
                 return BadRequest(result);
             }
-          
                 return Ok(result);
         }
     }

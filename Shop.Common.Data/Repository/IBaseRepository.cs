@@ -11,7 +11,7 @@ namespace Shop.Common.Data.Repository
         void Update(TEntity entity);
         void Remove(TEntity entity);
         List<TEntity> GetAll();
-        TEntity GetEntityBy(TType Id);
+        List<TEntity> GetEntityById(int Id);
         bool Exists(Expression<Func<TEntity, bool>> filter);
     }
 }

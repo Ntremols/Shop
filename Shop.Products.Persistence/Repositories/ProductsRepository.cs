@@ -43,6 +43,11 @@ namespace Shop.Products.Persistence.Repositories
             return products;
         }
 
+        public List<Domain.Entities.Products> GetEntityById(int Id)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Domain.Entities.Products> GetProductsById(int productId)
         {
             throw new NotImplementedException();
